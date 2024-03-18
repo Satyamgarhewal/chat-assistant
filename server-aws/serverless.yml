@@ -1,0 +1,25 @@
+org: satyamgarhewal
+app: genai-assist
+service: aws-node-http-api-project
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+package:
+  excludeDevDependencies: false
+  individually: true
+
+functions:
+  createChat:
+    handler: src/functions/chat-assistant/handlers/post-handler.handler
+    timeout: 30
+    events:
+      - httpApi:
+          path: /create-chat
+          method: post
